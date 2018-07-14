@@ -9,7 +9,7 @@
 
 /*
  * More precisely: compareTo for Strings 
- * returns a negative number if the first String comes before the second String – 		
+ * returns a negative number if the first String comes before the second String
  */
 package UVA;
 import java.util.*;

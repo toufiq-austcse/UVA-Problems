@@ -6,13 +6,45 @@ package UVA;
  * Dept. Of CSE
  * Ahsanullah University Of Science And Technology
 */
+
 import java.io.*;
 import java.util.*;
 import java.math.*;
-public class UVA11349 {
 
+public class UVA10198 {
 
+    public static void main(String[] args) throws FileNotFoundException {
+         /*File file = new File("E:\\Programming\\Practice\\src\\UVA\\input.txt");
+        Scanner sc = new Scanner(new FileInputStream(file));*/
+        Scanner sc = new Scanner(System.in);
+        OutputWriter out = new OutputWriter(System.out);
+        BigInteger[] dp = new BigInteger[1000 + 1];
+        dp[1] = new BigInteger("2");
+        dp[2] = new BigInteger("5");
+        dp[3] = new BigInteger("13");
 
+        while (sc.hasNext()) {
+
+            int n = sc.nextInt();
+
+            if (n == 1) {
+                out.println(dp[n]);
+            } else if (n == 2) {
+                out.println(dp[n]);
+            } else if (n == 3) {
+                out.println(dp[n]);
+            } else {
+                for (int i = 4; i <= n; i++) {
+                    dp[i] = ((dp[i - 1].multiply(new BigInteger("2"))).add(dp[i - 2])).add(dp[i - 3]);
+                }
+
+                out.println(dp[n]);
+            }
+        }
+
+        out.close();
+
+    }
 
     public static class InputReader {
         private boolean finished = false;
@@ -240,74 +272,166 @@ public class UVA11349 {
         public interface SpaceCharFilter {
             public boolean isSpaceChar(int ch);
         }
-        public int[] nextIntArray(int n){
-            int[] array=new int[n];
-            for(int i=0;i<n;++i)array[i]=nextInt();
+
+        public int[] nextIntArray(int n) {
+            int[] array = new int[n];
+            for (int i = 0; i < n; ++i) array[i] = nextInt();
             return array;
         }
-        public int[] nextSortedIntArray(int n){
-            int array[]=nextIntArray(n);
+
+        public int[] nextSortedIntArray(int n) {
+            int array[] = nextIntArray(n);
             Arrays.sort(array);
             return array;
         }
-        public int[] nextSumIntArray(int n){
-            int[] array=new int[n];
-            array[0]=nextInt();
-            for(int i=1;i<n;++i)array[i]=array[i-1]+nextInt();
+
+        public int[] nextSumIntArray(int n) {
+            int[] array = new int[n];
+            array[0] = nextInt();
+            for (int i = 1; i < n; ++i) array[i] = array[i - 1] + nextInt();
             return array;
         }
-        public long[] nextLongArray(int n){
-            long[] array=new long[n];
-            for(int i=0;i<n;++i)array[i]=nextLong();
+
+        public long[] nextLongArray(int n) {
+            long[] array = new long[n];
+            for (int i = 0; i < n; ++i) array[i] = nextLong();
             return array;
         }
-        public long[] nextSumLongArray(int n){
-            long[] array=new long[n];
-            array[0]=nextInt();
-            for(int i=1;i<n;++i)array[i]=array[i-1]+nextInt();
+
+        public long[] nextSumLongArray(int n) {
+            long[] array = new long[n];
+            array[0] = nextInt();
+            for (int i = 1; i < n; ++i) array[i] = array[i - 1] + nextInt();
             return array;
         }
-        public long[] nextSortedLongArray(int n){
-            long array[]=nextLongArray(n);
+
+        public long[] nextSortedLongArray(int n) {
+            long array[] = nextLongArray(n);
             Arrays.sort(array);
             return array;
         }
     }
 
-    public static void main(String[] args) {
-        InputReader sc =  new InputReader(System.in);
-        int t = sc.nextInt();
+    public static class OutputWriter {
+        private final PrintWriter writer;
 
-       for(int i=1;i<=t;i++){
-           String s = sc.readLine();
+        public OutputWriter(OutputStream outputStream) {
+            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(outputStream)));
+        }
 
-           String[] part = s.split(" ");
-           int n = Integer.parseInt(part[2]);
+        public OutputWriter(Writer writer) {
+            this.writer = new PrintWriter(writer);
+        }
 
-           boolean isSymmetric = true;
+        public void print(char[] array) {
+            writer.print(array);
+        }
 
-           long[] arr = new  long[n*n];
+        public void print(Object... objects) {
+            for (int i = 0; i < objects.length; i++) {
+                if (i != 0) {
+                    writer.print(' ');
+                }
+                writer.print(objects[i]);
+            }
+        }
 
-           for(int j=0;j<n*n;j++){
-               arr[j] = sc.nextLong();
-           }
+        public void print(int[] array) {
+            for (int i = 0; i < array.length; i++) {
+                if (i != 0) {
+                    writer.print(' ');
+                }
+                writer.print(array[i]);
+            }
+        }
 
-           int half = (n*n)/2;
+        public void print(double[] array) {
+            for (int i = 0; i < array.length; i++) {
+                if (i != 0) {
+                    writer.print(' ');
+                }
+                writer.print(array[i]);
+            }
+        }
 
-           for(int j=0;j<=half;j++){
-               if(arr[j]<0 || arr[j]!=arr[(n*n-1)-j]){
-                   isSymmetric = false;
-                   break;
-               }
-           }
+        public void print(long[] array) {
+            for (int i = 0; i < array.length; i++) {
+                if (i != 0) {
+                    writer.print(' ');
+                }
+                writer.print(array[i]);
+            }
+        }
 
-           if(isSymmetric){
-               System.out.println("Mytest #"+i+": Symmetric.");
-           }
-           else{
-               System.out.println("Mytest #"+i+": Non-symmetric.");
-           }
+        public void println(int[] array) {
+            print(array);
+            writer.println();
+        }
 
-       }
+        public void println(double[] array) {
+            print(array);
+            writer.println();
+        }
+
+        public void println(long[] array) {
+            print(array);
+            writer.println();
+        }
+
+        public void println() {
+            writer.println();
+        }
+
+        public void println(Object... objects) {
+            print(objects);
+            writer.println();
+        }
+
+        public void print(char i) {
+            writer.print(i);
+        }
+
+        public void println(char i) {
+            writer.println(i);
+        }
+
+        public void println(char[] array) {
+            writer.println(array);
+        }
+
+        public void printf(String format, Object... objects) {
+            writer.printf(format, objects);
+        }
+
+        public void close() {
+            writer.close();
+        }
+
+        public void flush() {
+            writer.flush();
+        }
+
+        public void print(long i) {
+            writer.print(i);
+        }
+
+        public void println(long i) {
+            writer.println(i);
+        }
+
+        public void print(int i) {
+            writer.print(i);
+        }
+
+        public void println(int i) {
+            writer.println(i);
+        }
+
+        public void separateLines(int[] array) {
+            for (int i : array) {
+                println(i);
+            }
+        }
     }
+
 }

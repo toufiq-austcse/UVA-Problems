@@ -29,7 +29,7 @@ public class UVA10945 {
 			}
 		
 		if(isSame){
-			System.out.println("You won’t be eaten!");
+			System.out.println("You won't be eaten!");
 		}
 		else{
 			System.out.println("Uh oh..");
